@@ -20,7 +20,7 @@
             align-items: center;
             padding: 20px;
         }
-        sss
+        
         .container {
             width: 100%;
             max-width: 500px;
@@ -85,7 +85,7 @@
             width: 100%;
             padding: 16px;
             background: #4a00e0;
-            color: rgb(187, 221, 143);
+            color: white;
             border: none;
             border-radius: 8px;
             font-size: 18px;
@@ -126,26 +126,9 @@
         footer {
             text-align: center;
             padding: 20px;
-            color: #fcfafa;
+            color: #666;
             font-size: 0.9rem;
             border-top: 1px solid #eee;
-        }
-        
-        .success-message {
-            background: #494d48;
-            color: rgb(217, 240, 10);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .error {
-            color: #ff4757;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
         }
         
         @media (max-width: 600px) {
@@ -168,46 +151,42 @@
         </header>
         
         <div class="form-container">
-            <form id="contactForm">
+            <form id="contactForm" action="#" method="post">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="Enter your full name">
-                    <div class="error" id="nameError">Please enter your name</div>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter your email address">
-                    <div class="error" id="emailError">Please enter a valid email address</div>
+                    <input type="email" id="email" placeholder="Enter your email address" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <select id="subject">
+                    <select id="subject" required>
                         <option value="">Select a subject</option>
                         <option value="general">General Inquiry</option>
                         <option value="support">Technical Support</option>
                         <option value="feedback">Feedback</option>
                         <option value="other">Other</option>
                     </select>
-                    <div class="error" id="subjectError">Please select a subject</div>
                 </div>
                 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" placeholder="Type your message here..."></textarea>
-                    <div class="error" id="messageError">Please enter your message</div>
+                    <textarea id="message" placeholder="Type your message here..." required></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label>Preferred Contact Method</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="contactEmail" name="contactMethod" value="email">
+                            <input type="radio" id="contactEmail" name="contactMethod" value="email" required>
                             <label for="contactEmail">Email</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="contactPhone" name="contactMethod" value="phone">
+                            <input type="radio" id="contactPhone" name="contactMethod" value="phone" required>
                             <label for="contactPhone">Phone</label>
                         </div>
                     </div>
@@ -221,11 +200,6 @@
                 </div>
                 
                 <button type="submit">Send Message</button>
-                
-                <div class="success-message" id="successMessage">
-                                Thank you! 
-                    Your message has been sent successfully.
-                </div>
             </form>
         </div>
         
@@ -233,58 +207,5 @@
             <p>© 2025 Contact Form. All rights reserved by rslotif.</p>
         </footer>
     </div>
-
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Reset errors
-            const errors = document.querySelectorAll('.error');
-            errors.forEach(error => error.style.display = 'none');
-            
-            let isValid = true;
-            
-            // Validate name
-            const name = document.getElementById('name');
-            if (!name.value.trim()) {
-                document.getElementById('nameError').style.display = 'block';
-                isValid = false;
-            }
-            
-            // Validate email
-            const email = document.getElementById('email');
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email.value.trim() || !emailPattern.test(email.value)) {
-                document.getElementById('emailError').style.display = 'block';
-                isValid = false;
-            }
-            
-            // Validate subject
-            const subject = document.getElementById('subject');
-            if (!subject.value) {
-                document.getElementById('subjectError').style.display = 'block';
-                isValid = false;
-            }
-            
-            // Validate message
-            const message = document.getElementById('message');
-            if (!message.value.trim()) {
-                document.getElementById('messageError').style.display = 'block';
-                isValid = false;
-            }
-            
-            // If form is valid, show success message
-            if (isValid) {
-                document.getElementById('successMessage').style.display = 'block';
-                // Reset form
-                this.reset();
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 5000);
-            }
-        });
-    </script>
 </body>
 </html>
